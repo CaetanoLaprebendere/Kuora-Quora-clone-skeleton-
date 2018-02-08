@@ -1,0 +1,6 @@
+<%= @question.the_question %>
+<form method="GET" action=<%="/questions/" + @question.id.to_s%>>
+	<input type="hidden" name="_method" value="DELETE">
+<br> <br>
+  <input type="submit" value="delete">
+</form>

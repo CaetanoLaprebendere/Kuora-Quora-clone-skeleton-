@@ -1,0 +1,13 @@
+<%= @question.the_question %>
+<form method="POST" action=<%="/questions/" + @question.id.to_s%>>
+	<input type="hidden" name="_method" value="PUT">
+<br> <br>
+  <input type="text" name="the_question"> <br> <br>
+  <input type="submit" value="update">
+</form>
+
+
+<form method="POST" action=<%="/questions/" + @question.id.to_s%>>
+	<input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+</form>
