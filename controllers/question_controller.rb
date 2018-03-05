@@ -1,36 +1,18 @@
-# Specify gemfile Location and general variables
-
-ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __FILE__)
-
-puts ENV['BUNDLE_GEMFILE']
-
-# Perform requiring gem that we need
-
-######################################################################
-
-# basic
-
-require 'rubygems'
-
-require 'bundler/setup' if File.exist?(ENV['BUNDLE_GEMFILE'])
-
-require 'pathname'
-
-require 'pg'
-
-require 'active_record'
-
-require 'sinatra'
-
-APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
-
-require APP_ROOT.join('config', 'database')
-
 get '/' do
 
-erb :"home"
+ @name = nil || cookies[:name]
+ erb :'home'
 
 end
+
+post "/" do
+
+ cookies[:name] = params["name"]
+
+ redirect "/"
+
+end
+
 
 get '/questions/new' do
  erb :"new"
@@ -39,6 +21,8 @@ end
 
 post '/submit' do
   @question = Question.new(the_question: params[:the_question])
+    
+       @question.user_id = cookies[:user_id]
 
        if @question.save
   
@@ -49,6 +33,7 @@ post '/submit' do
 end
 
 get '/questions' do
+
 	@questions = Question.all
 	erb :"questions/questions"
 end

@@ -13,3 +13,8 @@ end
 gem "pg", "~> 0.18"
 
 gem "activerecord"
+
+gem "byebug"
+
+gem "bcrypt"
+
